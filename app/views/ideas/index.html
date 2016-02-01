@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ideabox JS</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Ideabox Revisited <small>A JavaScript Nightmare by Sekhar P.</small></h1>
+</div>
+
+<%= Idea.first.to_json %>
+
+</body>
+</html>
