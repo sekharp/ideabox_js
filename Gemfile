@@ -18,6 +18,7 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'teaspoon-mocha'
   gem 'binding_of_caller'
 end
 

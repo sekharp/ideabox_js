@@ -1,28 +1,41 @@
 $(document).ready(function() {
   getIdeas();
   createIdea();
+  deleteIdea();
+  searchIdeas();
 });
 
 function renderIdea(idea) {
-  $("#latest-ideas").append(
+  var body = truncateBody(idea.body);
+
+  $("#latest-ideas").prepend(
     "<div class='idea' data-id='"
     + idea.id
     + "'><h6>Published on "
     + idea.created_at
     + "</h6><p>"
-    + "<b>"
+    + "<b id='idea-title' contentEditable='true'>"
     + idea.title
-    + "</b><p>"
-    + idea.body
+    + "</b><p contentEditable='true'>"
+    + body
     + "</p><p>Quality: "
     + idea.quality
-    + "  <button id='delete-idea' name='button-fetch' class='btn btn-default btn-xs'>+</button>"
-    + "  <button id='edit-idea' name='button-fetch' class='btn btn-default btn-xs'>-</button>"
+    + "  <button id='upvote-idea' name='button-fetch' class='btn btn-default btn-xs'>+</button>"
+    + "  <button id='downvote-idea' name='button-fetch' class='btn btn-default btn-xs'>-</button>"
     + "</p>"
     + "<button id='delete-idea' name='button-fetch' class='btn btn-default btn-xs'>Delete</button>"
     + "  <button id='edit-idea' name='button-fetch' class='btn btn-default btn-xs'>Edit</button>"
     + "</div>"
     )
+}
+
+function truncateBody(body) {
+  if (body.length > 100) {
+    var trimmedBody = body.substring(0,98);
+    return trimmedBody.substring(0, Math.min(trimmedBody.length, trimmedBody.lastIndexOf(' '))) + '...'
+  } else {
+    return body
+  };
 }
 
 function getIdeas() {
@@ -51,4 +64,31 @@ function createIdea() {
     $.post("api/ideas.json", ideaParams, $(this).serialize())
       .done(renderIdea);
   });
+}
+
+function deleteIdea() {
+  $('#latest-ideas').delegate('#delete-idea', 'click', function() {
+    var $idea = $(this).closest('.idea');
+
+    $.ajax({
+      type: 'DELETE',
+      url: 'api/ideas/' + $idea.attr('data-id') + '.json',
+      success: function(response) {
+        $idea.remove();
+      }
+    });
+  });
+}
+
+function searchIdeas() {
+  $("#filter").keyup(function(){
+		var filter = $(this).val();
+		$("#latest-ideas").children().each(function(){
+			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+				$(this).fadeOut();
+			} else {
+				$(this).show();
+			}
+		});
+	});
 }

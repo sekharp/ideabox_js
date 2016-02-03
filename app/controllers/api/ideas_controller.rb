@@ -5,12 +5,15 @@ class Api::IdeasController < ApplicationController
     respond_with Idea.all
   end
 
-  def show
-    respond_with Idea.find_by(idea_params)
-  end
-
   def create
     respond_with Idea.create(idea_params), location: nil
+  end
+
+  def destroy
+    respond_with Idea.destroy(params[:id])
+  end
+
+  def update
   end
 
   private
