@@ -9,9 +9,13 @@ class Api::IdeasController < ApplicationController
     respond_with Idea.find_by(idea_params)
   end
 
+  def create
+    respond_with Idea.create(idea_params), location: nil
+  end
+
   private
 
   def idea_params
-    params.permit(:title, :body, :quality, :created_at, :updated_at)
+    params.require(:idea).permit(:title, :body, :quality)
   end
 end
