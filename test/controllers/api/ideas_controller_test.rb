@@ -27,7 +27,7 @@ class Api::IdeasControllerTest < ActionController::TestCase
     assert_kind_of Hash, json_response
   end
 
-  test "#create responsds to json" do
+  test "#create responds to json" do
     get :create, format: :json, idea: {title: 'title', body: 'body'}
     assert_response :success
   end
