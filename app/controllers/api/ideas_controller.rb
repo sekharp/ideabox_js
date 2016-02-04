@@ -5,6 +5,10 @@ class Api::IdeasController < ApplicationController
     respond_with Idea.all
   end
 
+  def show
+    respond_with Idea.find(params[:id])
+  end
+
   def create
     respond_with Idea.create(idea_params), location: nil
   end
@@ -14,6 +18,8 @@ class Api::IdeasController < ApplicationController
   end
 
   def update
+    @idea = Idea.find(params[:id]).update(idea_params)
+    respond_with @idea, json: @idea
   end
 
   private

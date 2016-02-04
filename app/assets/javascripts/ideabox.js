@@ -18,15 +18,20 @@ function renderIdea(idea) {
     + idea.title
     + "</b><p contentEditable='true'>"
     + body
-    + "</p><p>Quality: "
+    + "</p><p id='idea-quality"
+    + idea.id
+    + "'>Quality: "
     + idea.quality
-    + "  <button id='upvote-idea' name='button-fetch' class='btn btn-default btn-xs'>+</button>"
+    + "<p><button id='upvote-idea"
+    + idea.id
+    + "' name='button-fetch' class='btn btn-default btn-xs'>+</button>"
     + "  <button id='downvote-idea' name='button-fetch' class='btn btn-default btn-xs'>-</button>"
     + "</p>"
     + "<button id='delete-idea' name='button-fetch' class='btn btn-default btn-xs'>Delete</button>"
     + "  <button id='edit-idea' name='button-fetch' class='btn btn-default btn-xs'>Edit</button>"
     + "</div>"
-    )
+  );
+    upvoteIdea(idea.id);
 }
 
 function truncateBody(body) {
@@ -91,4 +96,29 @@ function searchIdeas() {
 			}
 		});
 	});
+}
+
+function upvoteIdea(id) {
+  $('#upvote-idea' + id).on('click', function(){
+    event.preventDefault();
+
+    $.getJSON('/api/ideas/' + id, function(idea){
+      var newQuality = function(){
+        if (idea.quality === 'swill'){
+          return 'plausible'
+        } else { return 'genius'}
+      };
+
+      $.ajax({
+        type: 'PUT',
+        url: '/api/ideas/' + id + '.json',
+        data: {
+          idea: {quality: newQuality}
+        },
+        success: function(idea){
+          $('#idea-quality' + id).html(newQuality);
+        }
+      })
+    })
+  })
 }

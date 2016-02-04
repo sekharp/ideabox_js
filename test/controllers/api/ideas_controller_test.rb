@@ -6,5 +6,23 @@ class Api::IdeasControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # write for create, destroy and edit tests
+  test '#index returns an array of records' do
+    get :index, format: :json
+    assert_kind_of Array, json_response
+  end
+
+  # test '#create returns successful response' do
+  #   get :index, format: :json
+  #   assert_response :success
+  # end
+  #
+  # test '#delete returns successful response' do
+  #   get :index, format: :json
+  #   assert_response :success
+  # end
+  #
+  # test '#update returns successful response' do
+  #   get :index, format: :json
+  #   assert_response :success
+  # end
 end
