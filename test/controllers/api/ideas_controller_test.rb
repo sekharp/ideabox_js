@@ -28,10 +28,10 @@ class Api::IdeasControllerTest < ActionController::TestCase
   end
 
   # test '#create returns successful response' do
-  #   get :index, format: :json
+  #   get :create, format: :json
   #   assert_response :success
   # end
-  #
+
   # test '#delete returns successful response' do
   #   get :index, format: :json
   #   assert_response :success
