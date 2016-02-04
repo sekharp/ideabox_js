@@ -1,28 +1,9 @@
-== README
+# IdeaBox2.0
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Not your basic CRUD app!
 
-Things you may want to cover:
+##### What?
+Every developer has more ideas than time. As David Allen likes to say "the human brain is for creating ideas, not remembering them." In this project, we'll be building a simple application for recording and archiving our ideas (good and bad alike).
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+##### How?  -  Tech Stack
+Throughout the project, one of my focuses will be on providing a fluid and responsive client-side interface. To this end, we'll rely on JavaScript and jQuery to implement snappy filtering in the browser, and AJAX to enable inconspicuous communication between client and server.
