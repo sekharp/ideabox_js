@@ -19,7 +19,7 @@ class Api::IdeasController < ApplicationController
 
   def update
     @idea = Idea.find(params[:id]).update(idea_params)
-    respond_with @idea, json: @idea
+    respond_with @idea, json: @idea, location: nil
   end
 
   private

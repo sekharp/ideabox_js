@@ -3,6 +3,8 @@ $(document).ready(function() {
   createIdea();
   deleteIdea();
   searchIdeas();
+  editTitle();
+  editBody();
 });
 
 function renderIdea(idea) {
@@ -16,7 +18,7 @@ function renderIdea(idea) {
     + "</h6><p>"
     + "<b id='idea-title' contentEditable='true'>"
     + idea.title
-    + "</b><p contentEditable='true'>"
+    + "</b><p id='idea-body' contentEditable='true'>"
     + body
     + "</p><p id='idea-quality"
     + idea.id
@@ -148,5 +150,51 @@ function downvoteIdea(id) {
         }
       })
     })
+  })
+}
+
+function editTitle() {
+  $('#latest-ideas').delegate('#idea-title', 'keydown', function(event) {
+    if(event.which == 13 || event.keyCode == 13){
+      var $title = event.currentTarget.textContent
+      var $id = $(this).closest('.idea').attr('data-id')
+      var params = {
+        idea: {
+          title: $title,
+        }
+      }
+      event.preventDefault();
+      this.blur();
+      $.ajax({
+        type: 'PUT',
+        url: '/api/ideas/' + $id + '.json',
+        data: params,
+        success: function(idea){
+        }
+      })
+    }
+  })
+}
+
+function editBody() {
+  $('#latest-ideas').delegate('#idea-body', 'keydown', function(event) {
+    if(event.which == 13 || event.keyCode == 13){
+      var $body = event.currentTarget.textContent
+      var $id = $(this).closest('.idea').attr('data-id')
+      var params = {
+        idea: {
+          body: $body,
+        }
+      }
+      event.preventDefault();
+      this.blur();
+      $.ajax({
+        type: 'PUT',
+        url: '/api/ideas/' + $id + '.json',
+        data: params,
+        success: function(idea){
+        }
+      })
+    }
   })
 }

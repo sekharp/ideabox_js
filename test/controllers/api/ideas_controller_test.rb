@@ -27,18 +27,19 @@ class Api::IdeasControllerTest < ActionController::TestCase
     assert_kind_of Hash, json_response
   end
 
-  # test '#create returns successful response' do
-  #   get :create, format: :json
-  #   assert_response :success
-  # end
+  test "#create responsds to json" do
+    get :create, format: :json, idea: {title: 'title', body: 'body'}
+    assert_response :success
+  end
 
-  # test '#delete returns successful response' do
-  #   get :index, format: :json
-  #   assert_response :success
-  # end
-  #
-  # test '#update returns successful response' do
-  #   get :index, format: :json
-  #   assert_response :success
-  # end
+  test "#update responds to json" do
+    idea = Idea.create(title: 'updated title', body: 'updated body')
+    get :update, format: :json, id: idea.id, idea: {title: 'updated title'}
+    assert_response :success
+  end
+
+  test "#delete responds to json" do
+    put :destroy, format: :json, id: Idea.last.id
+    assert_response :success
+  end
 end
