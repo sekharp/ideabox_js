@@ -167,7 +167,7 @@ function editTitle() {
       this.blur();
       ideaAjaxCall($id, params);
     }
-  })
+  });
 }
 
 function editBody() {
@@ -184,7 +184,7 @@ function editBody() {
       this.blur();
       ideaAjaxCall($id, params);
     }
-  })
+  });
 }
 
 function ideaAjaxCall(id, params) {
@@ -194,5 +194,5 @@ function ideaAjaxCall(id, params) {
     data: params,
     success: function(idea){
     }
-  })
+  });
 }
