@@ -165,15 +165,9 @@ function editTitle() {
       }
       event.preventDefault();
       this.blur();
-      $.ajax({
-        type: 'PUT',
-        url: '/api/ideas/' + $id + '.json',
-        data: params,
-        success: function(idea){
-        }
-      })
+      ideaAjaxCall($id, params);
     }
-  })
+  });
 }
 
 function editBody() {
@@ -188,13 +182,17 @@ function editBody() {
       }
       event.preventDefault();
       this.blur();
-      $.ajax({
-        type: 'PUT',
-        url: '/api/ideas/' + $id + '.json',
-        data: params,
-        success: function(idea){
-        }
-      })
+      ideaAjaxCall($id, params);
     }
-  })
+  });
+}
+
+function ideaAjaxCall(id, params) {
+  $.ajax({
+    type: 'PUT',
+    url: '/api/ideas/' + id + '.json',
+    data: params,
+    success: function(idea){
+    }
+  });
 }
